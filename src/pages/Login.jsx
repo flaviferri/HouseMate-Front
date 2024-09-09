@@ -2,7 +2,7 @@ import { useState } from "react";
 import Input from "../components/input/Input";
 import Button from "../components/buttons/Buttons"
 import { useNavigate } from "react-router-dom";
-import Popup from "../components/popUp/popUp";
+import Popup from "../components/popUp/PopUp";
 
 const Login = () => {
   const [email, setEmail] = useState("");
