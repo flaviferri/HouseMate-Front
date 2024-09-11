@@ -43,7 +43,7 @@ const DeleteIcon = ({ id, onDeleteSuccess }) => {
     <div>
       <div className="flex justify-end gap-[0.625rem] mr-[7%]">
         <button onClick={openPopup}>
-          <img src="/Assets/Delete-icon.svg" alt="Eliminar" />
+          <img src="/Assets/Delete-icon.svg" alt="" />
         </button>
       </div>
       <PopUp

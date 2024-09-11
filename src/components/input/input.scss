@@ -1,0 +1,26 @@
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem; /* mx-2 my-2 (2 * 0.25rem = 0.5rem) */
+  color: blue /* text-blue */
+}
+
+.custom-input {
+  border-radius: 1.2rem; /* rounded-[1.2rem] */
+  outline: none;
+  box-shadow: inset 0 4px 4px -0px rgba(0, 0, 0, 0.2); /* shadow-[inset_0_4px_4px_-0px_rgba(0,0,0,0.2)] */
+  font-size: 1rem; /* text-base */
+  font-family: 'Jaldi', sans-serif; /* font-jaldi */
+  font-weight: 400; /* font-[400] */
+  padding-top: 1.2rem; /* py-[1.2rem] */
+  padding-bottom: 1.2rem;
+  padding-left: 1rem; /* pl-[1rem] */
+  padding-right: 7rem; /* pr-[7rem] */
+  background-color: lightgoldenrodyellow;
+  height: 2rem; /* h-[2rem] */
+  color: blue; /* placeholder-blue */
+}
+
+.custom-input:focus {
+  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.2); /* focus:ring-4 */
+}
