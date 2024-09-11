@@ -3,6 +3,7 @@ import Button from "../components/buttons/Buttons"
 import { Link, useNavigate } from "react-router-dom";
 import Input from "../components/input/Input";
 import Popup from "../components/popUp/PopUp";
+import "./register.scss"
 
 const SignIn = () => {
     const [name, setName] = useState("");
@@ -72,13 +73,12 @@ const SignIn = () => {
     async function handleSubmit(e) {
         e.preventDefault();
 
-        if (!name || !lastName|| !email || !password|| !birth_day || !departure_day) {
+        if (!name || !lastName|| !email || !password|| !birth_day ) {
           setNameError(!name);
           setLastNameError(!lastName);
           setEmailError(!email);
           setPasswordError(!password);
           setBirth_dayError(!birth_day);
-          setDeparture_dayError(!departure_day);
           return;
         }
 
@@ -90,7 +90,8 @@ const SignIn = () => {
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    body: JSON.stringify({ name, lastName, email, password , birth_day,departure_day}),
+                    body: JSON.stringify({ name, lastName, email, password , birth_day,departure_day: departure_day || null 
+                    }),
                 }
             );
 
@@ -110,6 +111,8 @@ const SignIn = () => {
         } catch {
             setPopUpMessage(`Error, we cannot register the user `);
             setPopUpFunction(() => reloadPage);
+            console.log (`Problem with the registration`)
+
       
         }
     }
@@ -124,9 +127,9 @@ const SignIn = () => {
     };
 
     return (
-        <div className="flex flex-row justify-center w-[auto] py-2">
+        <div className="registerBox">
             <section className="w-[22rem] rounded-[1.2rem] bg-white border-4 border-yellow gap-2 py-[1.2rem] px-[1.5rem]">
-                <h1 className="text-pink font-jaldi font-bold text-center text-[1.4rem] py-1">
+                <h1 className="title">
                 User Registration
                 </h1>
                 <hr className="w-[100%] size-2 border-pink" />
@@ -139,23 +142,23 @@ const SignIn = () => {
                         onChange={handleName}
                     />
                     {nameError && (
-                        <p className="text-pink text-sm pl-3">
+                        <p className="">
                         Name requiered
                         </p>
                     )}
+                        <Input
+                        title="Last Name"
+                        placeholder="Write your last name ..."
+                        type="text"
+                        value={lastName}
+                        onChange={handleLastName}
+                    />
+                    {lastNameError && (
+                        <p className="text-pink text-sm pl-3">
+                            Name requiered
+                        </p>
+                    )}
                     <Input
-                      title="Last Name"
-                      placeholder="Write your last name ..."
-                      type="text"
-                      value={lastName}
-                      onChange={handleLastName}
-                  />
-                  {lastNameError && (
-                      <p className="text-pink text-sm pl-3">
-                          Nombre requerido
-                      </p>
-                  )}
-                  <Input
                         title="E-mail"
                         placeholder="Write a valid email..."
                         type="email"
@@ -164,7 +167,7 @@ const SignIn = () => {
                     />
                     {emailError && (
                         <p className="text-pink text-sm pl-3">
-                            Email requerido
+                            Email requiered
                         </p>
                     )}
                     <Input
@@ -180,24 +183,24 @@ const SignIn = () => {
                             </p>
                     )}
                     <Input
-                      title="Birthday date "
-                      placeholder="Write your birthday ..."
-                      type="text"
-                      value={birth_day}
-                      onChange={handleBirth_day}
-                  />
-                  {birth_dayError && (
-                      <p className="text-pink text-sm pl-3">
-                          Birth day requiered
-                      </p>
-                  )}
-                  <Input
-                      title="Departing date  "
-                      placeholder="write it only if you know it..."
-                      type="text"
-                      value={departure_day}
-                      onChange={handleDeparture_day}
-                  />
+                        title="Birthday date "
+                        placeholder="Write your birthday ..."
+                        type="text"
+                        value={birth_day}
+                        onChange={handleBirth_day}
+                    />
+                    {birth_dayError && (
+                        <p className="text-pink text-sm pl-3">
+                            Birth day requiered
+                        </p>
+                    )}
+                    <Input
+                        title="Departing date  "
+                        placeholder="write it only if you know it..."
+                        type="text"
+                        value={departure_day}
+                        onChange={handleDeparture_day}
+                    />
 
                     <div className="flex flex-row justify-center py-1">
                         <Button
@@ -215,12 +218,7 @@ const SignIn = () => {
                         />
                     </div>
                 </form>
-                <h2 className="font-bold text-blue text-center">
-                Do you already have an account? Access{" "}
-                    <Link to="/login" className="text-green hover:text-blue">
-                        Here
-                    </Link>
-                </h2>
+             
             </section>
             <Popup
                 isPopupOpen={isPopupOpen}

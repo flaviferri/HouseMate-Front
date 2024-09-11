@@ -1,8 +1,9 @@
 import { useState } from "react";
 import Input from "../components/input/Input";
 import Button from "../components/buttons/Buttons"
-import { useNavigate } from "react-router-dom";
+import { Link , useNavigate } from "react-router-dom";
 import Popup from "../components/popUp/PopUp";
+import "./login.scss"
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -97,10 +98,10 @@ const reloadPage = () => {
 };
 
   return (
-    <div className="flex flex-row justify-center w-[auto] py-2">
-      <section className="w-[22rem] rounded-[1.2rem] bg-white border-4 border-yellow gap-2 py-[1.2rem] px-[1.5rem]">
-        <h1 className="text-pink font-jaldi font-bold text-center text-[1.4rem] py-1">User Accest</h1>
-        <hr className="w-[100%] size-2 border-pink"/>
+    <div className="nav-item-container">
+      <section className="section-custom">
+        <h1 className="text-custom">User Accest</h1>
+        <hr className="element-custom"/>
         <form onSubmit={handleSubmit} >
           <Input 
             title="E-mail" 
@@ -138,7 +139,14 @@ const reloadPage = () => {
               onClick={() => {
                 navigate("/");
               }}
+              
             />
+              <h2 className="font-bold text-blue text-center">
+                Don't you have and account ?? Sing in !!!  Access{" "}
+                    <Link to="/register" className="text">
+                        Here
+                    </Link>
+                </h2>
           </div>
         </form>
       </section>

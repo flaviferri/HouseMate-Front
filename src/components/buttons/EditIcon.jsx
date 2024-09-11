@@ -7,7 +7,7 @@ const EditIcon = ({ id, name }) => {
 		navigate(`/edit/${name}`, { state: { data: id} })
 	}
   return (
-    <button onClick={handleRedirect}><img src="/Assets/Edit-icon.svg" alt="Editar destino" /></button>
+    <button onClick={handleRedirect}><img src="/Assets/Edit-icon.svg" alt="" /></button>
   )
 }
 EditIcon.propTypes = {
