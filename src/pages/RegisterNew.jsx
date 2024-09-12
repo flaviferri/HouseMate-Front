@@ -263,7 +263,7 @@ const RegisterNew = () => {
                 onHide={() => {
                     setIsPopupOpen(false);
                     if(sucessfully){
-                        navigate("/login");
+                        navigate("/login")
                     }
                 }}
                 text={popUpMessage}
