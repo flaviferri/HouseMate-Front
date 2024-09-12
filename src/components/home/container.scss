@@ -1,0 +1,22 @@
+//.section-grid {
+//  display: grid;
+//  gap: 1.25rem; /* gap-5 (1.25rem = 5 * 0.25rem) */
+//  margin: 2rem 2rem; /* mx-8 my-8 */
+//  position: relative;
+//}
+//
+//@media (min-width: 768px) {
+//  /* md:grid-cols-2 */
+//  .section-grid {
+//    grid-template-columns: repeat(2, 1fr);
+//  }
+//}
+//
+//@media (min-width: 1024px) {
+//  /* lg:grid-cols-4 and lg:mx-[4.375rem] */
+//  .section-grid {
+//    grid-template-columns: repeat(4, 1fr);
+//    margin-left: 4.375rem; /* 4.375rem = 70px */
+//    margin-right: 4.375rem;
+//  }
+//}
