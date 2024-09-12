@@ -5,6 +5,7 @@ import { Link , useNavigate } from "react-router-dom";
 import Popup from "../components/popUp/PopUp";
 import "./login.scss"
 
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -76,7 +77,7 @@ const Login = () => {
       );
       setPopUpFunction(() => navigateHome);
       setIsPopupOpen(true);
-      
+
     } catch {
         setPopUpMessage("Error, usuario o contraseña incorrectos.");
         setPopUpFunction(() => reloadPage);
@@ -98,6 +99,7 @@ const reloadPage = () => {
 };
 
   return (
+
     <div className="nav-item-container">
       <section className="section-custom">
         <h1 className="text-custom">User Accest</h1>
