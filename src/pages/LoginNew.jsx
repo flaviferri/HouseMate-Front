@@ -19,6 +19,7 @@ function LoginNew() {
     const [popUpMessage, setPopUpMessage] = useState("");
     const [popUpFunction, setPopUpFunction] = useState(null);
     const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const [sucessfully, setSucessfully] = useState(false);
 
     const navigate = useNavigate();
 
@@ -68,19 +69,21 @@ function LoginNew() {
 
             if (!response.ok) {
                 setPopUpMessage("Error! Usuario o contraseña incorrectos.");
-                setPopUpFunction(() => reloadPage);
+                setSucessfully(false)
                 setIsPopupOpen(true);
             } else {
                 const data = await response.json();
                 localStorage.setItem('authToken', data.token);
                 localStorage.setItem('user', data.user.id);
+                localStorage.setItem('firstName', data.user.name);
+                localStorage.setItem('lastName', data.user.latname);
                 setPopUpMessage(`Bienvenid@ de nuevo ${data.user.name}`);
-                setPopUpFunction(() => navigateHome);
+                setSucessfully(true)
                 setIsPopupOpen(true);
             }
         } catch {
             setPopUpMessage("Error! Usuario o contraseña incorrectos.");
-            setPopUpFunction(() => reloadPage);
+            setSucessfully(false)
             setIsPopupOpen(true);
         } finally {
             setLoading(false);
@@ -155,7 +158,9 @@ function LoginNew() {
                 show={isPopupOpen}
                 onHide={() => {
                     setIsPopupOpen(false);
-                    popUpFunction
+                    if(sucessfully){
+                        navigate("/")
+                    }
                 }}
                 text={popUpMessage}
             />

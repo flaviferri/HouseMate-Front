@@ -4,35 +4,37 @@ import Button from "../components/buttons/Buttons.jsx";
 
 import ButtonReact from "react-bootstrap/Button";
 
-import {Link} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React, {useState} from "react";
 import {ButtonGroup, Col, Container, Row} from "react-bootstrap";
-import ButtonBootstrap from "react-bootstrap/Button";
 import SimpleModalMessage from "../components/modals/SimpleModalMessage.jsx";
 
 
 const RegisterNew = () => {
 
     const [name, setName] = useState("");
-    const [lastName, setLastName] = useState("");
+    const [lastname, setLastname] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [birth_day, setBirth_day] = useState("");
-    const [departure_day, setDeparture_day] = useState("");
+    const [departure_date, setDeparture_date] = useState("");
 
     const [nameError, setNameError] = useState(false);
-    const [lastNameError, setLastNameError] = useState(false);
+    const [lastnameError, setLastnameError] = useState(false);
     const [emailError, setEmailError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
     const [birth_dayError, setBirth_dayError] = useState(false);
-    const [departure_dayError, setDeparture_dayError] = useState(false);
+    const [departure_dateError, setDeparture_dateError] = useState(false);
 
     const [popUpMessage, setPopUpMessage] = useState("");
     const [popUpFunction, setPopUpFunction] = useState(null);
     const [isPopupOpen, setIsPopupOpen] = useState(false);
 
     const [loading, setLoading] = useState(false);
+    const [sucessfully, setSucessfully] = useState(false);
 
+    const navigate = useNavigate();
+    
     function handleName(e) {
         setName(e.target.value);
         if (e.target.value) {
@@ -41,9 +43,9 @@ const RegisterNew = () => {
     }
 
     function handleLastName(e) {
-        setLastName(e.target.value);
+        setLastname(e.target.value);
         if (e.target.value) {
-            setLastNameError(false);
+            setLastnameError(false);
         }
     }
 
@@ -70,34 +72,37 @@ const RegisterNew = () => {
     }
 
     function handleDeparture_day(e) {
-        setDeparture_day(e.target.value);
+        setDeparture_date(e.target.value);
         console.log(e.target.value)
         if (e.target.value) {
-            setDeparture_dayError(false);
+            setDeparture_dateError(false);
         }
     }
 
     async function handleSubmit(e) {
         e.preventDefault();
 
-        if (!name || !lastName|| !email || !password|| !birth_day ) {
+        if (!name || !lastname|| !email || !password|| !birth_day ) {
             setNameError(!name);
-            setLastNameError(!lastName);
+            setLastnameError(!lastname);
             setEmailError(!email);
             setPasswordError(!password);
             setBirth_dayError(!birth_day);
             return;
         }
-
         try {
-            const response = await fetch(
-                "http://localhost:4001/auth/register",
-                {
+            const response = await fetch("http://localhost:4001/auth/register",{
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    body: JSON.stringify({ name, lastName, email, password , birth_day,departure_day: departure_day || null
+                    body: JSON.stringify({ 
+                        name, 
+                        lastname, 
+                        email, 
+                        password,
+                        birth_day,
+                        departure_date: departure_date || null
                     }),
                 }
             );
@@ -105,18 +110,22 @@ const RegisterNew = () => {
             if (!response.ok) {
                 setPopUpMessage(`Error, we cannot register the user `);
                 setPopUpFunction(() => reloadPage);
+                setSucessfully(false)
                 setIsPopupOpen(true);
             }else{
                 setPopUpMessage(`Great!! Your user has been registered. You can sigIn now :)`);
                 console.log (`Great!! Your user has been registered. You can sigIn now :)`)
-                setPopUpFunction(() => navigateLogin());
+                setSucessfully(true)
+                setIsPopupOpen(true);
             }
-        } catch {
+          } catch (error) {
+            console.error(error);
             setPopUpMessage(`Error, we cannot register the user `);
             setPopUpFunction(() => reloadPage);
             console.log (`Problem with the registration`)
             setIsPopupOpen(true);
-        }
+          }
+          
     }
 
     const navigateLogin = () => {
@@ -159,13 +168,13 @@ const RegisterNew = () => {
                             Last Name:
                         </Form.Label>
                         <Form.Control
-                            value={lastName}
+                            value={lastname}
                             type="text"
                             placeholder="Smith"
                             className="without-radius"
                             onChange={handleLastName}
                         />
-                        {lastNameError && (
+                        {lastnameError && (
                             <p className="text-danger">This field is mandatory!</p>
                         )}
                     </Form.Group>
@@ -201,8 +210,8 @@ const RegisterNew = () => {
                         <Form.Label id={"label.birth_day"}>Birthday date:</Form.Label>
                         <Form.Control
                             value={birth_day}
-                            type="date"
-                            placeholder="1/1/2024"
+                            type="text"
+                            placeholder="1990-02-12"
                             className="without-radius"
                             onChange={handleBirth_day}
                         />
@@ -214,13 +223,13 @@ const RegisterNew = () => {
                     <Form.Group className="mb-3" controlId="loginform.ControlDepartureDay">
                         <Form.Label id={"label.departure_date"}>Departing date:</Form.Label>
                         <Form.Control
-                            value={departure_day}
-                            type="date"
-                            placeholder="1/1/2024"
+                            value={departure_date}
+                            type="text"
+                            placeholder="2025-04-12"
                             className="without-radius"
                             onChange={handleDeparture_day}
                         />
-                        {departure_dayError && (
+                        {departure_dateError && (
                             <p className="text-danger">Hey hey!! Do not forget the password</p>
                         )}
                     </Form.Group>
@@ -253,7 +262,9 @@ const RegisterNew = () => {
                 show={isPopupOpen}
                 onHide={() => {
                     setIsPopupOpen(false);
-                    popUpFunction
+                    if(sucessfully){
+                        navigate("/login");
+                    }
                 }}
                 text={popUpMessage}
             />
