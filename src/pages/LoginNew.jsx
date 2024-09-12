@@ -68,7 +68,7 @@ function LoginNew() {
             });
 
             if (!response.ok) {
-                setPopUpMessage("Error! Usuario o contraseña incorrectos.");
+                setPopUpMessage("Error! Incorrect username or password.");
                 setSucessfully(false)
                 setIsPopupOpen(true);
             } else {
@@ -82,7 +82,7 @@ function LoginNew() {
                 setIsPopupOpen(true);
             }
         } catch {
-            setPopUpMessage("Error! Usuario o contraseña incorrectos.");
+            setPopUpMessage("Error! Incorrect username or password.");
             setSucessfully(false)
             setIsPopupOpen(true);
         } finally {

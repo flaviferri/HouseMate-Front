@@ -44,26 +44,29 @@ const FlatsContainer = () => {
             <br />
             <h1 className="display-4">My Flats</h1>
             <br />
-            <ListGroup as="ol" numbered>
-                {flats.map((flat) => (
-                    <ListGroup.Item
-                        action
-                        as="li"
-                        className="d-flex justify-content-between align-items-start"
-                        key={flat.id}
-                    >
-                        <div className="ms-2 me-auto">
-                            <div className="fw-bold">{flat.name}</div>
-                            {flat.description && <p>{flat.description}</p>}
-                        </div>
-                        <Button variant="link">View More</Button>
-                    </ListGroup.Item>
-                ))}
-            </ListGroup>
+            {flats.length === 0 ? (
+                <p>There are no houses currently associated with your name.</p>
+            ) : (
+                <ListGroup as="ol" numbered>
+                    {flats.map((flat) => (
+                        <ListGroup.Item
+                            action
+                            as="li"
+                            className="d-flex justify-content-between align-items-start"
+                            key={flat.id}
+                        >
+                            <div className="ms-2 me-auto">
+                                <div className="fw-bold">{flat.name}</div>
+                                {flat.description && <p>{flat.description}</p>}
+                            </div>
+                            <Button variant="link">View More</Button>
+                        </ListGroup.Item>
+                    ))}
+                </ListGroup>
+            )}
             <br />
             <br />
         </Container>
     );
 };
-
 export default FlatsContainer;

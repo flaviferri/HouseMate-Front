@@ -64,7 +64,7 @@ const Login = () => {
       });
 
       if (!response.ok) {
-        setPopUpMessage("Error, usuario o contraseña incorrectos.");
+        setPopUpMessage("Error, incorrect username or password.");
         setPopUpFunction(() => reloadPage);
         setIsPopupOpen(true);
       }
@@ -79,7 +79,7 @@ const Login = () => {
       setIsPopupOpen(true);
 
     } catch {
-        setPopUpMessage("Error, usuario o contraseña incorrectos.");
+        setPopUpMessage("Error, incorrect username or password.");
         setPopUpFunction(() => reloadPage);
         setIsPopupOpen(true);
     } finally {

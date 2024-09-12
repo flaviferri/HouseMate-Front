@@ -10,6 +10,8 @@ import Register from "../pages/Register"
 import Layout from "../layout/Layout";
 import LoginNew from "../pages/LoginNew.jsx";
 import RegisterNew from "../pages/RegisterNew.jsx";
+import AddFlatForm from "../pages/AddFlatForm.jsx";
+
 
 export const router = createBrowserRouter([
     {
@@ -22,18 +24,18 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/login',
-                // element: <Login />,
+           
                 element: <LoginNew/>,
             },
             {
                 path: '/register',
-                //element: <Register />
+     
                 element: <RegisterNew/>
             },
-            /*  {
-                   path: '/create',
-                   element: <Create />
-             } */
+            {
+                path: '/flatcreate',
+                element: <AddFlatForm />
+            } 
         ],
     },
 ]);

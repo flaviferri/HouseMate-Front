@@ -1,38 +1,44 @@
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
-import {IoHomeOutline} from "react-icons/io5";
-import {Button} from "react-bootstrap";
-import Form from "react-bootstrap/Form";
-import {CiLogin} from "react-icons/ci";
-
+import { IoHomeOutline } from "react-icons/io5";
+import { CiLogin } from "react-icons/ci";
 
 const NavbarNew = () => {
+    const [userName, setUserName] = useState(""); 
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const storedName = localStorage.getItem("firstName");  
+
+        if (storedName) {
+            setUserName(storedName);  
+        }
+    }, []);
+
+    const handleHomeClick = () => {
+        navigate("/login");  
+    };
+
     return (
         <Navbar className="bg-body-tertiary">
             <Container>
-                <Navbar.Brand href="#">
-                    <IoHomeOutline className="icono-Home"/>
+                <Navbar.Brand onClick={handleHomeClick} style={{ cursor: 'pointer' }}>
+                    <IoHomeOutline className="icono-Home" />
                 </Navbar.Brand>
-                <Navbar.Toggle/>
+                <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content">
                     <Navbar.Text>
-                        Signed in as: <a href="#login">Mark Otto</a>
+                        Signed in as: <a href="#login">{userName ? userName : "Loading..."}</a>
                     </Navbar.Text>
                 </Navbar.Collapse>
-                {/*<Form className="d-flex justify-content-end">*/}
-                {/*    <Form.Control*/}
-                {/*        type="search"*/}
-                {/*        placeholder="Search"*/}
-                {/*        className="me-2"*/}
-                {/*        aria-label="Search"*/}
-                {/*    />*/}
-                {/*    <Button variant="outline-success">Search</Button>*/}
-                {/*</Form>*/}
                 <Navbar.Brand href="#" className="justify-content-end" to={"/register"}>
-                    <CiLogin className="login-icon" id={"logout-icon"}/>
+                    <CiLogin className="login-icon" id={"logout-icon"} />
                 </Navbar.Brand>
             </Container>
         </Navbar>
-    )
-}
-export default NavbarNew
+    );
+};
+
+export default NavbarNew;

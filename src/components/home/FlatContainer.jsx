@@ -3,7 +3,7 @@ import { useNavigate  } from 'react-router-dom';
 import EditIcon from "../buttons/EditIcon";
 import DeleteIcon from "../buttons/DeleteIcon";
 
-const DestinationCard = ({id, photo, name, country, createdBy, actualUser, isLoggedIn}) => {
+const FlatContainer = ({id, photo, name, country, createdBy, actualUser, isLoggedIn}) => {
 	const navigate = useNavigate();
 	
 	const handleRedirect = () => {
@@ -32,7 +32,7 @@ const DestinationCard = ({id, photo, name, country, createdBy, actualUser, isLog
     );
 };
 
-DestinationCard.propTypes = {
+FlatContainer.propTypes = {
 	id: PropTypes.number,
 	photo: PropTypes.string,
 	name: PropTypes.string,
@@ -42,4 +42,4 @@ DestinationCard.propTypes = {
 	isLoggedIn: PropTypes.bool
   };
 
-export default DestinationCard;
+export default FlatContainer;
